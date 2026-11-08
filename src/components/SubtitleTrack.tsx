@@ -1,9 +1,10 @@
-import { useCurrentFrame, useVideoConfig, spring } from 'remotion'
+import { useTimelineFrame } from '../timing'
+import { useVideoConfig, spring } from 'remotion'
 import { CUES } from '../data/models'
 
-// Frosted glass karaoke capsule at the bottom, perfectly synced to the voiceover.
+// Subtitle cues follow the proportionally retimed visual timeline.
 export const SubtitleTrack: React.FC = () => {
-  const frame = useCurrentFrame()
+  const frame = useTimelineFrame()
   const { fps } = useVideoConfig()
   const activeIndex = CUES.findIndex((c) => frame >= c.from && frame < c.to)
   if (activeIndex < 0) return null
