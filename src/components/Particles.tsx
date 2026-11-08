@@ -1,4 +1,5 @@
-import { AbsoluteFill, useCurrentFrame } from 'remotion'
+import { useTimelineFrame } from '../timing'
+import { AbsoluteFill } from 'remotion'
 
 const rand = (seed: number) => {
   const x = Math.sin(seed * 127.1) * 43758.5453
@@ -7,7 +8,7 @@ const rand = (seed: number) => {
 
 // Floating stardust / bokeh particles with variable opacity.
 export const Particles: React.FC<{ count?: number }> = ({ count = 46 }) => {
-  const frame = useCurrentFrame()
+  const frame = useTimelineFrame()
   const dots = []
   for (let i = 0; i < count; i++) {
     const baseX = rand(i + 1) * 1080
