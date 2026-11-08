@@ -1,5 +1,6 @@
+import { useTimelineFrame } from '../timing'
 import React from 'react'
-import { spring, useCurrentFrame, useVideoConfig, interpolate } from 'remotion'
+import { spring, useVideoConfig, interpolate } from 'remotion'
 import { Brain, Sparkles, Workflow, Route, Eye, Cpu, Braces, Scissors } from 'lucide-react'
 import type { AiModel } from '../data/models'
 
@@ -37,7 +38,7 @@ export const ModelCard: React.FC<{ model: AiModel; index: number; emphasized: bo
   index,
   emphasized,
 }) => {
-  const frame = useCurrentFrame()
+  const frame = useTimelineFrame()
   const { fps } = useVideoConfig()
   const entrance = spring({ frame: frame - 20 - index * 6, fps, config: { damping: 14, stiffness: 120, mass: 0.6 } })
   const pulse = 0.5 + Math.abs(Math.sin(frame / 26)) * 0.5
