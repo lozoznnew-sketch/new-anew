@@ -1,5 +1,6 @@
+import { useTimelineFrame } from './timing'
 import React from 'react'
-import { AbsoluteFill, Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig, Easing } from 'remotion'
+import { AbsoluteFill, Audio, interpolate, spring, staticFile, useVideoConfig, Easing } from 'remotion'
 import { IsoGrid } from './components/IsoGrid'
 import { Particles } from './components/Particles'
 import { Vignette } from './components/Vignette'
@@ -66,7 +67,7 @@ const getCamera = (frame: number): Camera => {
 }
 
 const GlitchTitle: React.FC = () => {
-  const frame = useCurrentFrame()
+  const frame = useTimelineFrame()
   const enter = spring({ frame: frame - 40, fps: 30, config: { damping: 14, stiffness: 120, mass: 0.6 } })
   const glitch = frame > 150 && frame < 190 ? Math.sin(frame * 1.7) * 8 : 0
   const opacity = interpolate(frame, [0, 60, 250, 285], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })
@@ -102,7 +103,7 @@ const GlitchTitle: React.FC = () => {
 }
 
 const CallToAction: React.FC = () => {
-  const frame = useCurrentFrame()
+  const frame = useTimelineFrame()
   const { fps } = useVideoConfig()
   const pop = spring({ frame: frame - 1935, fps, config: { damping: 14, stiffness: 120, mass: 0.6 } })
   const breathe = 1 + Math.sin(frame / 30) * 0.03
@@ -142,7 +143,7 @@ const emphasizedIndex = (frame: number) => {
 }
 
 export const AiModelsVideo: React.FC = () => {
-  const frame = useCurrentFrame()
+  const frame = useTimelineFrame()
   const cam = getCamera(frame)
   const shockwave = interpolate(frame, [1890, 1980, 2070], [0, 1, 0], {
     extrapolateLeft: 'clamp',
@@ -177,7 +178,7 @@ export const AiModelsVideo: React.FC = () => {
       <CallToAction />
       <SubtitleTrack />
       <Vignette />
-      <Audio src={staticFile('audio/voiceover.mp3')} />
+      <Audio src={staticFile('audio/voiceover.wav')} />
     </AbsoluteFill>
   )
 }
