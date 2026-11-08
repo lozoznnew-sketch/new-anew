@@ -1,8 +1,9 @@
-import { AbsoluteFill, useCurrentFrame } from 'remotion'
+import { useTimelineFrame } from '../timing'
+import { AbsoluteFill } from 'remotion'
 
 // Isometric 3D perspective grid that breathes with the camera.
 export const IsoGrid: React.FC = () => {
-  const frame = useCurrentFrame()
+  const frame = useTimelineFrame()
   const breathe = Math.sin(frame / 90) * 6
   return (
     <AbsoluteFill style={{ overflow: 'hidden', opacity: 0.16, perspective: 1200 }}>
