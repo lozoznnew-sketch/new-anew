@@ -25,7 +25,7 @@ export interface Cue {
   text: string
 }
 
-// 72s voiceover, 30fps => frames = seconds * 30
+// Original 72-second design cues at 30fps, retimed to the recording by useTimelineFrame.
 export const CUES: Cue[] = [
   { from: 0, to: 60, text: 'هل تعتقد أن الذكاء الاصطناعي' },
   { from: 60, to: 120, text: 'هو فقط شات جي بي تي؟' },
