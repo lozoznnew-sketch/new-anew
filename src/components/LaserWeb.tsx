@@ -1,9 +1,10 @@
-import { useCurrentFrame } from 'remotion'
+import { useTimelineFrame } from '../timing'
+
 import { MODELS } from '../data/models'
 
 // Animated SVG laser traces with a continuously running photon pulse.
 export const LaserWeb: React.FC<{ opacity?: number }> = ({ opacity = 0.6 }) => {
-  const frame = useCurrentFrame()
+  const frame = useTimelineFrame()
   const centers = MODELS.map((m) => ({ x: m.x + 200, y: m.y + 170 }))
   const links: Array<[number, number]> = [
     [0, 1], [0, 3], [1, 2], [2, 5], [3, 4], [4, 6], [5, 7], [6, 7], [0, 4], [1, 5],
