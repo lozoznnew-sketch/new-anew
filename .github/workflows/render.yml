@@ -1,0 +1,29 @@
+name: Render Video
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Check voiceover audio exists
+        run: |
+          if [ ! -f public/audio/voiceover.mp3 ]; then
+            echo "ERROR: public/audio/voiceover.mp3 is missing. Upload it first (see README)."
+            exit 1
+          fi
+      - name: Render video (2160 frames, 1080x1920, 30fps)
+        run: npx remotion render src/index.ts AiModels out/video.mp4 --codec=h264 --concurrency=4
+      - name: Upload rendered video
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-models-video
+          path: out/video.mp4
+          retention-days: 30
