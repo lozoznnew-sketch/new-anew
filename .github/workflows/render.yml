@@ -15,11 +15,11 @@ jobs:
         run: npm install
       - name: Check voiceover audio exists
         run: |
-          if [ ! -f public/audio/voiceover.mp3 ]; then
-            echo "ERROR: public/audio/voiceover.mp3 is missing. Upload it first (see README)."
+          if [ ! -f public/audio/voiceover.wav ]; then
+            echo "ERROR: public/audio/voiceover.wav is missing. Restore the supplied WAV file (see README)."
             exit 1
           fi
-      - name: Render video (2160 frames, 1080x1920, 30fps)
+      - name: Render video with original-speed voiceover (1086 frames, 1080x1920, 30fps)
         run: npx remotion render src/index.ts AiModels out/video.mp4 --codec=h264 --concurrency=4
       - name: Upload rendered video
         uses: actions/upload-artifact@v4
